@@ -1,14 +1,18 @@
 export const getRequestMask = (path: any, method: any) => {
-  const id = getUuidFromUrl(path);
+  const id = getIdFromUrl(path);
 
   return id ? `/api/users/:id-${method}` : `${path}-${method}`;
 };
 
-function getUuidFromUrl(url: string) {
+export const getUuidFromUrl = (url: string | undefined) => {
   const UUID_REGEX =
     /[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}/;
 
-  const match = url.match(UUID_REGEX);
+  const match = url?.match(UUID_REGEX);
+  console.log(match?.input);
+  return match ? match[0] === match.input : null;
+};
 
-  return match ? match[0] : null;
-}
+const getIdFromUrl = (url: string) => {
+  return url.split("/")[3];
+};

@@ -11,8 +11,6 @@ export class Router {
   }
 
   requestHandler({ path, method, handler }: RequestHandlerParams) {
-    // const existsId = path.split("/")[3];
-
     if (!this.routes[path]) {
       this.routes[path] = {};
     }
@@ -38,5 +36,13 @@ export class Router {
 
   post(path: string, handler: any) {
     this.requestHandler({ path, method: HTTP_METHODS.POST, handler });
+  }
+
+  put(path: string, handler: any) {
+    this.requestHandler({ path, method: HTTP_METHODS.PUT, handler });
+  }
+
+  delete(path: string, handler: any) {
+    this.requestHandler({ path, method: HTTP_METHODS.DELETE, handler });
   }
 }

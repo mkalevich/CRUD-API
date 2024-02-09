@@ -31,4 +31,12 @@ export class Server {
       console.log(`The server is running on ${port} port...`),
     );
   }
+
+  // addRouter(router: any) {
+  //   console.log(Object.keys(router.routes));
+  //   Object.keys(router.routes).forEach((endpoint) => {
+  //     console.log("endpoint", Object.keys(endpoint));
+  //     Object.keys(endpoint);
+  //   });
+  // }
 }

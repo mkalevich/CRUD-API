@@ -3,8 +3,10 @@ import { Router } from "./router/Router.js";
 import { Server } from "./server/Server.js";
 import {
   addUser,
+  deleteUser,
   getAllUsers,
   getUserById,
+  updateUser,
 } from "./user-handlers/userHandlers.js";
 import { PATH } from "./router/constants.js";
 
@@ -16,10 +18,16 @@ const server = new Server();
 
 server.listen(PORT);
 
-const route = new Router();
+const router = new Router();
 
-route.get(PATH.API_USERS, getAllUsers);
+// server.addRouter(router);
 
-route.get(PATH.USER_BY_ID, getUserById);
+router.get(PATH.API_USERS, getAllUsers);
 
-route.post(PATH.API_USERS, addUser);
+router.get(PATH.USER_BY_ID, getUserById);
+
+router.post(PATH.API_USERS, addUser);
+
+router.put(PATH.USER_BY_ID, updateUser);
+
+router.delete(PATH.USER_BY_ID, deleteUser);

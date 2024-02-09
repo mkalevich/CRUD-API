@@ -7,6 +7,7 @@
   "scripts": {
     "build": "webpack",
     "start:dev": "nodemon --loader ts-node/esm ./src/index.ts",
+    "start:prod": "npm run build && node dist/build.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
