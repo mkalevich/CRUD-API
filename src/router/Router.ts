@@ -1,18 +1,17 @@
-import { IRoutes, RequestHandlerParams } from "./types";
-import { getRequestMask } from "../helpers.js";
 import { emitter } from "../emitter.js";
+import { getRequestMask } from "../helpers.js";
+import { HTTP_METHODS } from "./constants";
+import { IRoutes, RequestHandlerParams } from "./types";
 
 export class Router {
   private readonly routes: IRoutes;
-  emitter: any;
 
   constructor() {
     this.routes = {};
   }
 
   requestHandler({ path, method, handler }: RequestHandlerParams) {
-    const existsId = path.split("/")[3];
-    console.log("existsId", existsId);
+    // const existsId = path.split("/")[3];
 
     if (!this.routes[path]) {
       this.routes[path] = {};
@@ -26,16 +25,18 @@ export class Router {
 
     routePath[method] = handler;
 
-    emitter.on(getRequestMask(method, !!existsId), (req: any, res: any) =>
+    console.log("inside", getRequestMask(path, method));
+
+    emitter.on(getRequestMask(path, method), (req: any, res: any) =>
       handler(req, res),
     );
   }
 
   get(path: string, handler: any) {
-    this.requestHandler({ path, method: "GET", handler });
+    this.requestHandler({ path, method: HTTP_METHODS.GET, handler });
   }
 
   post(path: string, handler: any) {
-    this.requestHandler({ path, method: "POST", handler });
+    this.requestHandler({ path, method: HTTP_METHODS.POST, handler });
   }
 }

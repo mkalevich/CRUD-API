@@ -14,19 +14,15 @@ export class Server {
     this.server = createServer(this.configureServer);
   }
 
-  configureServer(request: IncomingMessage, response: ServerResponse) {
-    const urlWithId = request.url?.split("/")[3];
-
-    const emitted = emitter.emit(
-      getRequestMask(request.method, !!urlWithId),
-      request,
-      response,
-    );
+  configureServer(req: IncomingMessage, res: ServerResponse) {
+    const { url, method } = req;
+    console.log("outside", getRequestMask(url, method));
+    const emitted = emitter.emit(getRequestMask(url, method), req, res);
 
     if (!emitted) {
-      response.writeHead(404);
+      res.writeHead(404);
 
-      response.end("Such path does not exists");
+      res.end("Such path does not exists");
     }
   }
 
