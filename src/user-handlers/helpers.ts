@@ -2,7 +2,7 @@ import { IncomingMessage, ServerResponse } from "http";
 import {
   HTTP_STATUS_CODES,
   INTERNAL_SERVER_ERROR_MESSAGE,
-} from "../router/constants.js";
+} from "../router/constants";
 
 export const buildResponse = (
   res: ServerResponse,

@@ -1,5 +1,5 @@
-import { emitter } from "../emitter.js";
-import { getRequestMask } from "../helpers.js";
+import { emitter } from "../emitter";
+import { getRequestMask } from "../helpers";
 import { HTTP_METHODS } from "./constants";
 import { IRoutes, RequestHandlerParams } from "./types";
 
@@ -22,8 +22,6 @@ export class Router {
     }
 
     routePath[method] = handler;
-
-    console.log("inside", getRequestMask(path, method));
 
     emitter.on(getRequestMask(path, method), (req: any, res: any) =>
       handler(req, res),

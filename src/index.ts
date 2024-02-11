@@ -1,14 +1,14 @@
 import { config } from "dotenv";
-import { Router } from "./router/Router.js";
-import { Server } from "./server/Server.js";
+import { Router } from "./router/Router";
+import { Server } from "./server/Server";
 import {
   addUser,
   deleteUser,
   getAllUsers,
   getUserById,
   updateUser,
-} from "./user-handlers/userHandlers.js";
-import { PATH } from "./router/constants.js";
+} from "./user-handlers";
+import { PATH } from "./router/constants";
 
 config();
 
@@ -19,8 +19,6 @@ const server = new Server();
 server.listen(PORT);
 
 const router = new Router();
-
-// server.addRouter(router);
 
 router.get(PATH.API_USERS, getAllUsers);
 

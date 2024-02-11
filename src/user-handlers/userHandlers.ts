@@ -1,13 +1,13 @@
 import { IncomingMessage, ServerResponse } from "http";
 import { v4 as uuidv4 } from "uuid";
-import { users } from "../db/users.js";
-import { getUuidFromUrl } from "../helpers.js";
+import { users } from "../db/users";
+import { getUuidFromUrl } from "../helpers";
 import {
   HTTP_STATUS_CODES,
   INVALID_USER_ID_MESSAGE,
   USER_DOES_NOT_EXIST_MESSAGE,
-} from "../router/constants.js";
-import { buildResponse, serverErrorHandler } from "./helpers.js";
+} from "../router/constants";
+import { buildResponse, serverErrorHandler } from "./helpers";
 
 export const addUser = (req: IncomingMessage, res: ServerResponse) => {
   serverErrorHandler(req, res);

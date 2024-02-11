@@ -4,8 +4,8 @@ import {
   Server as HTTPServer,
   ServerResponse,
 } from "http";
-import { getRequestMask } from "../helpers.js";
-import { emitter } from "../emitter.js";
+import { getRequestMask } from "../helpers";
+import { emitter } from "../emitter";
 
 export class Server {
   server: HTTPServer;
@@ -16,7 +16,7 @@ export class Server {
 
   configureServer(req: IncomingMessage, res: ServerResponse) {
     const { url, method } = req;
-    console.log("outside", getRequestMask(url, method));
+
     const emitted = emitter.emit(getRequestMask(url, method), req, res);
 
     if (!emitted) {
@@ -31,12 +31,4 @@ export class Server {
       console.log(`The server is running on ${port} port...`),
     );
   }
-
-  // addRouter(router: any) {
-  //   console.log(Object.keys(router.routes));
-  //   Object.keys(router.routes).forEach((endpoint) => {
-  //     console.log("endpoint", Object.keys(endpoint));
-  //     Object.keys(endpoint);
-  //   });
-  // }
 }

@@ -9,7 +9,7 @@ export const getUuidFromUrl = (url: string | undefined) => {
     /[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}/;
 
   const match = url?.match(UUID_REGEX);
-  console.log(match?.input);
+
   return match ? match[0] === match.input : null;
 };
 
