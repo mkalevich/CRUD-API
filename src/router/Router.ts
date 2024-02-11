@@ -2,6 +2,7 @@ import { emitter } from "../emitter";
 import { getRequestMask } from "../helpers";
 import { HTTP_METHODS } from "./constants";
 import { IRoutes, RequestHandlerParams } from "./types";
+import { IncomingMessage, ServerResponse } from "http";
 
 export class Router {
   private readonly routes: IRoutes;
@@ -23,24 +24,37 @@ export class Router {
 
     routePath[method] = handler;
 
-    emitter.on(getRequestMask(path, method), (req: any, res: any) =>
-      handler(req, res),
+    emitter.on(
+      getRequestMask(path, method),
+      (req: IncomingMessage, res: ServerResponse) => handler(req, res),
     );
   }
 
-  get(path: string, handler: any) {
+  get(
+    path: string,
+    handler: (request: IncomingMessage, response: ServerResponse) => void,
+  ) {
     this.requestHandler({ path, method: HTTP_METHODS.GET, handler });
   }
 
-  post(path: string, handler: any) {
+  post(
+    path: string,
+    handler: (request: IncomingMessage, response: ServerResponse) => void,
+  ) {
     this.requestHandler({ path, method: HTTP_METHODS.POST, handler });
   }
 
-  put(path: string, handler: any) {
+  put(
+    path: string,
+    handler: (request: IncomingMessage, response: ServerResponse) => void,
+  ) {
     this.requestHandler({ path, method: HTTP_METHODS.PUT, handler });
   }
 
-  delete(path: string, handler: any) {
+  delete(
+    path: string,
+    handler: (request: IncomingMessage, response: ServerResponse) => void,
+  ) {
     this.requestHandler({ path, method: HTTP_METHODS.DELETE, handler });
   }
 }

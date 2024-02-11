@@ -7,7 +7,7 @@ import {
 export const buildResponse = (
   res: ServerResponse,
   statusCode: number,
-  data?: any,
+  data?: string | object,
 ) => {
   res.writeHead(statusCode, { "Content-Type": "application/json" });
   res.end(data ? JSON.stringify(data) : "");

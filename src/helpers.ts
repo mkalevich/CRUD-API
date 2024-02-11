@@ -1,4 +1,4 @@
-export const getRequestMask = (path: any, method: any) => {
+export const getRequestMask = (path: string = "", method: string = "") => {
   const id = getIdFromUrl(path);
 
   return id ? `/api/users/:id-${method}` : `${path}-${method}`;
